@@ -27,8 +27,8 @@
     }
 
     function draw() {
-        var n = (Math.sin(frame / (20 * 3.14159)) / 2 + 0.5) * 9; //* 9 + 4.5;
-        var d = (Math.cos(frame / (40 * 3.14159)) / 2 + 0.5) * 9; //* 9 + 4.5;
+        var n = (Math.sin(frame / (100 * 3.14159)) / 2 + 0.5) * 9; //* 9 + 4.5;
+        var d = (Math.cos(frame / (150 * 3.14159)) / 2 + 0.5) * 9; //* 9 + 4.5;
         var k = n/d;
         canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         for (var i=0;i<32*314159;i+=1000) {
