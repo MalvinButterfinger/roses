@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rose</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="application/javascript"></script>
+</head>
+<body>
+<script type='text/javascript'>
+    //<![CDATA[
+    var CANVAS_WIDTH = window.innerWidth - 20;
+    var CANVAS_HEIGHT = window.innerHeight - 20;
+    var FPS = 30;
+    var frame = 0;
+    var canvasElement = $("<canvas width='" + CANVAS_WIDTH +
+        "' height='" + CANVAS_HEIGHT + "'></canvas>");
+    var canvas = canvasElement.get(0).getContext("2d");
+    canvasElement.appendTo('body');
+
+    setInterval(function() {
+        update();
+        draw();
+    }, 1000/FPS);
+
+    function update() {
+        frame++;
+    }
+
+    function draw() {
+        var n = (Math.sin(frame / (20 * 3.14159)) / 2 + 0.5) * 9; //* 9 + 4.5;
+        var d = (Math.cos(frame / (40 * 3.14159)) / 2 + 0.5) * 9; //* 9 + 4.5;
+        var k = n/d;
+        canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        for (var i=0;i<32*314159;i+=1000) {
+            var th = i / 100000;
+            var x = (Math.cos(k * th) * Math.cos(th) / 2 + 0.5) * CANVAS_WIDTH; //* CANVAS_WIDTH + CANVAS_WIDTH / 2;
+            var y = (Math.cos(k * th) * Math.sin(th) / 2 + 0.5) * CANVAS_HEIGHT; //* CANVAS_HEIGHT + CANVAS_HEIGHT / 2;
+
+            canvas.fillStyle = "#" + rgbToHex(120 * (Math.sin(th*3) / 2 + 0.6),50  * (Math.sin(th*3) / 2 + 0.6),80  * (Math.sin(th*3) / 2 + 0.6));
+            canvas.fillRect(x,y,1,1);
+        }
+    }
+
+    function rgbToHex(R,G,B) {return toHex(R)+toHex(G)+toHex(B)}
+    function toHex(n) {
+        n = parseInt(n,10);
+        if (isNaN(n)) return "00";
+        n = Math.max(0,Math.min(n,255));
+        return "0123456789ABCDEF".charAt((n-n%16)/16)
+            + "0123456789ABCDEF".charAt(n%16);
+    }
+    //]]>
+</script>
+</body>
+</html>
